@@ -1,0 +1,84 @@
+Throughout this
+course, we've been making changes to our files, sometimes we ran them manually to test if they still
+worked after the change, sometimes we just
+forgot to do that. This is common for any software project no
+matter how big or small. As humans, we're not great at remembering to
+do lots of stuff so we can't rely on people remembering to test their
+code, not even ourselves. Luckily, we don't need to. We can write automated
+tests to test the code for us and then use a continuous integration or CI system to run those
+tests automatically. A continuous integration
+system will build and test our code every
+time there's a change. This means that it will
+run whenever there's a new commit in the main
+branch of our code. It will also run for any changes that come in
+through pull request. In other words, if we have continuous integration
+configured for our project, we can automatically run our tests using the
+code in a pull request. This way, we can verify
+that the test will pass after the new
+changes get merged back into the tree and
+that means instead of hoping our collaborators will remember to properly
+test their code, we can rely on our automated testing system to do it for us. Once we have our code
+automatically built and tested, the next automation step
+is continuous deployment which is sometimes called
+continuous delivery or CD. Continuous deployment means the new code is deployed often. The goal is to avoid roll outs with a lot of changes
+between two versions of a project and instead do incremental updates with only
+a few changes at a time. This allows errors to be
+caught and fixed early. Typical configurations
+include deploying a new version
+whenever a commit is merged into the main tree or whenever a branch
+is tagged for release. There's a large world of tools
+and platforms related to CICD which is what the whole
+system is usually called. One popular option
+is Jenkins which can be used to automate lots of different
+types of projects. Some repository
+hosting services like GitLab provide their
+own infrastructure for doing continuous integration. GitHub doesn't offer an
+integrated solution. Instead, the popular
+alternative is to use Travis which
+communicates with GitHub and can access
+the information from GitHub projects to know
+which integrations to run. No matter which tool you use, there are a bunch of concepts
+that you'll need to deal with when creating your own CICD. The first one is a
+concept of pipelines. Pipelines specify the steps that need to run to get
+the result you want. For a simple Python Project, the pipeline could be to just
+run the automated tests. For a web service written in Go, the pipeline could be
+compiled the program, run the unit tests
+and integration tests and finally deploy the
+code to a test instance. Another concept
+that turns up when doing CICD is artifacts. This is the name used to describe any files that are generated
+as part of the pipeline. This typically includes
+the compiled versions of the code but can include other generated
+files like PDFs for the documentation or
+OS specific packages for easy installation. On top of this, you might
+want to keep the logs of the pipelines build and test stages to review
+if things fail. When setting up CICD, we have to be careful about
+how we manage secrets. If our pipeline
+includes deploying a new version of the
+software to a test server, we need to somehow give
+the software that's running the pipeline
+access to our test server. There are a bunch of different
+strategies to do this, like exchanging SSH keys or using application
+specific API tokens. For some pipelines, it might be unavoidable to use
+one of these methods but be aware that
+you're giving access to your test servers to the owner of the service that's running
+the pipeline for you. It's a bit like giving
+your house keys to the person checking your
+heating once a year. So two things to remember, first, make sure the authorized entities for the test servers are not the same entities authorized to deploy on the
+production servers. That way, if there's any kind of compromise
+in the pipeline, your production server
+is not affected. Second, always have
+a plan to recover your access in case your
+pipeline gets compromised. If you want to set up Travis
+for your GitHub project, you can do that by logging
+into the Travis website at www.travis-ci.com using
+your GitHub account then enable the projects that you want to
+continuously integrate. After that, you'll need to add a configuration file
+to your project written in YAML format that states the language
+your project is in, in which steps to take
+for the pipeline. This file can be very simple if your project files are typical configuration for the language you're using but can also
+become very complex if you want to run a complicated
+pipeline with lots of stages and steps
+outside the defaults. We won't go into a ton of detail here but there's more info in
+the next reading coming up. Feel free to read up on it
+and investigate on your own if you want to continuously integrate and deliver
+your project.

@@ -1,0 +1,13 @@
+# Testing in my local machine, many improvement can be more applied
+
+Before: 
+        1st attempt | 2nd attempt | 3rd attempt
+real    0m46,006s   | 1m1,557s    | 0m53,072s
+user    0m7,661s    | 0m9,273s    | 0m9,161s
+sys     0m0,359s    | 0m0,419s    | 0m0,409s
+
+After:
+        1st attempt | 2nd attempt | 3rd attempt
+real    0m1,768s    | 0m3,154s    | 0m3,639s
+user    0m1,214s    | 0m0,309s    | 0m0,282s
+sys     0m0,042s    | 0m0,038s    | 0m0,043s
